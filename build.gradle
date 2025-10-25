@@ -1,6 +1,6 @@
 plugins {
     id("java-gradle-plugin")
-    id("maven-publish")
+    id('com.gradle.plugin-publish') version '1.2.1'
 }
 
 group = "io.github.coderfrish"
@@ -22,21 +22,21 @@ dependencies {
 }
 
 gradlePlugin {
+    website = "https://github.com/CoderFrish/"
+    vcsUrl = "https://github.com/ArkPowered/uploader"
+
     plugins {
         create("io.github.coderfrish.uploader") {
             id = "io.github.coderfrish.uploader"
+            displayName = "Uploader"
             implementationClass = "io.github.coderfrish.UploaderPlugin"
+            description = "A Gradle Plugin for upload github release."
+            tags.set(['tools', 'github', 'releases', "release"])
         }
     }
 }
 
 publishing {
-    repositories {
-        maven {
-            url file(project.buildDir)
-        }
-    }
-
     publications {
         create("mavenJava", MavenPublication) {
             from components.java
