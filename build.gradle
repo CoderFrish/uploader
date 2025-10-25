@@ -1,0 +1,45 @@
+plugins {
+    id("java-gradle-plugin")
+    id("maven-publish")
+}
+
+group = "io.github.coderfrish"
+version = "0.1.0"
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    implementation("com.google.code.gson:gson:2.13.2")
+    testImplementation("junit:junit:4.13.2")
+    implementation("com.squareup.okhttp3:okhttp:5.2.1")
+}
+
+gradlePlugin {
+    plugins {
+        create("io.github.coderfrish.uploader") {
+            id = "io.github.coderfrish.uploader"
+            implementationClass = "io.github.coderfrish.UploaderPlugin"
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            url file(project.buildDir)
+        }
+    }
+
+    publications {
+        create("mavenJava", MavenPublication) {
+            from components.java
+        }
+    }
+}
