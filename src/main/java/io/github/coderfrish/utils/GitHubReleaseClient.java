@@ -40,7 +40,7 @@ public class GitHubReleaseClient {
 
         try (Response response = client.newCall(httpRequest).execute()) {
             if (!response.isSuccessful()) {
-                throw new IOException("Failed to create release: " + response.code() + " - " + response.body().string());
+                throw new IOException("Failed to create release: " + response.body().string());
             }
 
             JsonObject responseJson = GSON.fromJson(response.body().string(), JsonObject.class);
@@ -64,10 +64,27 @@ public class GitHubReleaseClient {
 
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
-                throw new IOException("Failed to upload asset: " + response.code() + " - " + response.body().string());
+                throw new IOException("Failed to upload asset: " + response.body().string());
             }
+
             System.out.println("Asset uploaded successfully: " + file.getName());
         }
     }
 
+    public String fetchRepoBranch(String owner, String repo) throws IOException {
+        String repoUrl = String.format("%s/repos/%s/%s", baseUrl, owner, repo);
+        Request request = new Request.Builder().url(repoUrl).get()
+                .addHeader("Accept", "application/vnd.github.v3+json")
+                .addHeader("Authorization", "Bearer " + token)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new IOException("Failed to fetch repository branch: " + response.body().string());
+            }
+
+            JsonObject responseJson = GSON.fromJson(response.body().string(), JsonObject.class);
+            return responseJson.get("default_branch").getAsString();
+        }
+    }
 }

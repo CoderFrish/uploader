@@ -6,6 +6,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
+import java.util.Objects;
 
 public class UploadReleaseTask extends DefaultTask {
     private final UploaderExtension extension;
@@ -18,27 +19,21 @@ public class UploadReleaseTask extends DefaultTask {
     @TaskAction
     public void uploadRelease() {
         try {
+            Objects.requireNonNull(extension.token, "Token not be null.");
+            GitHubReleaseClient client = new GitHubReleaseClient(extension.token);
             String repoName = extension.repository.name;
             String repoOwner = extension.repository.owner;
 
-            if (extension.repository.name == null) {
-                throw new NullPointerException("repository name not be null");
-            }
-
-            if (extension.repository.owner == null) {
-                throw new NullPointerException("repository owner not be null");
-            }
-
-            if (extension.tagName == null) {
-                throw new NullPointerException("tag name not be null.");
-            }
+            Objects.requireNonNull(repoName, "Repository name not be null.");
+            Objects.requireNonNull(repoOwner, "Repository owner not be null.");
+            Objects.requireNonNull(extension.tagName, "Tag name not be null.");
 
             if (extension.name == null) {
                 extension.name = extension.tagName;
             }
 
             if (extension.targetCommitish == null) {
-                throw new NullPointerException("target commitish not be null.");
+                extension.targetCommitish = client.fetchRepoBranch(repoOwner, repoName);
             }
 
             ReleaseRequest request = new ReleaseRequest(
@@ -49,10 +44,6 @@ public class UploadReleaseTask extends DefaultTask {
                     extension.prerelease,
                     extension.targetCommitish,
                     extension.makeLatest
-            );
-
-            GitHubReleaseClient client = new GitHubReleaseClient(
-                    extension.token
             );
 
             String id = client.createRelease(repoOwner, repoName, request);

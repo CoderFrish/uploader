@@ -21,9 +21,12 @@ public class GitHubReleaseTest {
         );
 
         GitHubReleaseClient client = new GitHubReleaseClient("xxxx");
-        String id = client.createRelease("TraiumMC", "Tralux", request);
+//        String id = client.createRelease("TraiumMC", "Tralux", request);
 
-        client.uploadAsset("TraiumMC", "Tralux", id,
-                new File("D:\\uploader\\src\\test\\resources\\TEST_RESOURCE"), "text/plain");
+//        client.uploadAsset("TraiumMC", "Tralux", id,
+//                new File("D:\\uploader\\src\\test\\resources\\TEST_RESOURCE"), "text/plain");
+
+        String s = client.fetchRepoBranch("TraiumMC", "Tralux");
+        System.out.println(s);
     }
 }
