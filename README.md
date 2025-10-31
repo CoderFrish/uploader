@@ -8,7 +8,7 @@ Apply Plugin
 
 ```kotlin
 plugins {
-	id("io.github.coderfrish.uploader") version "0.1.0"
+	id("io.github.arkpowered.uploader") version "0.1.0"
 }
 ```
 

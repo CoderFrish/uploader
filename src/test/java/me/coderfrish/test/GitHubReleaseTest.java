@@ -1,10 +1,9 @@
 package me.coderfrish.test;
 
-import io.github.coderfrish.utils.GitHubReleaseClient;
-import io.github.coderfrish.utils.ReleaseRequest;
+import io.github.arkpowered.utils.GitHubReleaseClient;
+import io.github.arkpowered.utils.ReleaseRequest;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 
 public class GitHubReleaseTest {

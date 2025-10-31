@@ -3,7 +3,7 @@ plugins {
     id('com.gradle.plugin-publish') version '1.2.1'
 }
 
-group = "io.github.coderfrish"
+group = "io.github.arkpowered"
 version = "0.2.0"
 
 repositories {
@@ -22,14 +22,14 @@ dependencies {
 }
 
 gradlePlugin {
-    website = "https://github.com/CoderFrish/"
+    website = "https://github.com/ArkPowered/"
     vcsUrl = "https://github.com/ArkPowered/uploader"
 
     plugins {
-        create("io.github.coderfrish.uploader") {
-            id = "io.github.coderfrish.uploader"
+        create("io.github.arkpowered.uploader") {
+            id = "io.github.arkpowered.uploader"
             displayName = "Uploader"
-            implementationClass = "io.github.coderfrish.UploaderPlugin"
+            implementationClass = "io.github.arkpowered.UploaderPlugin"
             description = "A Gradle Plugin for upload github release."
             tags.set(['tools', 'github', 'releases', "release"])
         }

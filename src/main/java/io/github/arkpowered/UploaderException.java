@@ -1,4 +1,4 @@
-package io.github.coderfrish;
+package io.github.arkpowered;
 
 public class UploaderException extends RuntimeException {
     public UploaderException(Throwable message) {

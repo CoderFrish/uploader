@@ -1,7 +1,7 @@
-package io.github.coderfrish;
+package io.github.arkpowered;
 
-import io.github.coderfrish.utils.GitHubReleaseClient;
-import io.github.coderfrish.utils.ReleaseRequest;
+import io.github.arkpowered.utils.GitHubReleaseClient;
+import io.github.arkpowered.utils.ReleaseRequest;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 

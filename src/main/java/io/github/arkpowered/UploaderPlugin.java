@@ -1,4 +1,4 @@
-package io.github.coderfrish;
+package io.github.arkpowered;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;

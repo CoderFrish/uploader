@@ -1,4 +1,4 @@
-package io.github.coderfrish.utils;
+package io.github.arkpowered.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
